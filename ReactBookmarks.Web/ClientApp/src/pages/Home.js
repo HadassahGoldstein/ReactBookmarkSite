@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 
 export default function Home() {
     const [top5, setTop5] = useState([]);
-    const [isLogging, setIsLogging] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         const getBookmarks = async () => {
             const { data } = await axios.get('/api/bookmarks/Top5Urls');
             setTop5(data);
-            setIsLogging(false);
+            setIsLoading(false);
         }
         getBookmarks();
     }, [])
@@ -24,8 +24,8 @@ export default function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                    {isLogging && <h2>Loading...</h2>}
-                    {!isLogging &&                    
+                    {isLoading && <h2>Loading...</h2>}
+                    {!isLoading &&                    
                         top5.map(u => {
                             return (
                                 <tr>
